@@ -1,9 +1,13 @@
 <template>
   <div>
     <h1 class="weight-history__title mb-3">History</h1>
-    <weight-card date="13/7" :weightDifference="1.2" :weight="65"/>
-    <weight-card date="08/7" :weightDifference="-1.8" :weight="67"/>
-    <weight-card date="30/6" :weightDifference="-1.2" :weight="60"/>
+    <weight-card
+      v-for="weight_instant in weightData"
+      :key="weight_instant.id"
+      :date="weight_instant.date"
+      :weightDifference="weight_instant.difference"
+      :weight="weight_instant.weight"
+    />
   </div>
 </template>
 
@@ -13,6 +17,9 @@ import weightCard from "@/components/weight-card";
 export default {
   components: {
     "weight-card": weightCard
+  },
+  props: {
+    "weight-data": Array
   }
 };
 </script>

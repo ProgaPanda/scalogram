@@ -11,6 +11,7 @@ export default {};
 <style lang="scss" scoped>
 .new-weight-btn {
   z-index: 1000;
+  width: 50%;
   left: 50%;
   transform: translateX(-50%);
 }
