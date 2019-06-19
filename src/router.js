@@ -5,6 +5,7 @@ import 'firebase/auth';
 import Router from 'vue-router';
 
 import Dashboard from './views/Dashboard.vue';
+import addWeight from './views/AddWeight.vue';
 import Login from './views/Login.vue';
 Vue.use(Router);
 
@@ -16,6 +17,14 @@ const router = new Router({
 			path: '/',
 			name: 'dashboard',
 			component: Dashboard,
+			meta: {
+				requiresAuth: true
+			}
+		},
+		{
+			path: '/new-weight',
+			name: 'addWeight',
+			component: addWeight,
 			meta: {
 				requiresAuth: true
 			}

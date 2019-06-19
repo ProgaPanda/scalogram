@@ -4,12 +4,13 @@ import App from './App.vue';
 import router from './router';
 import './registerServiceWorker';
 import firebase from 'firebase/app';
+import 'firebase/auth';
 import 'firebase/firestore';
 let app = '';
 
 firebase.initializeApp({
 	apiKey: 'AIzaSyApQOEsN41Q-OydAMVoO1B_GSz5SS6D9SU',
-	authDomain: 'scalogram-io.firebaseapp.com',
+	authDomain: 'scalogram.firebaseapp.com',
 	databaseURL: 'https://scalogram-io.firebaseio.com',
 	projectId: 'scalogram-io',
 	storageBucket: 'scalogram-io.appspot.com',

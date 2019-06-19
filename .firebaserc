@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "scalogram-io"
+  },
+  "targets": {
+    "scalogram-io": {
+      "hosting": {
+        "app": [
+          "scalogram"
+        ]
+      }
+    }
   }
 }

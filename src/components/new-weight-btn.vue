@@ -1,6 +1,15 @@
 <template>
   <div>
-    <v-btn class="new-weight-btn" color="#19ffd6" large round fixed bottom>new weight</v-btn>
+    <v-btn
+      :to="{ name: 'addWeight'}"
+      class="new-weight-btn"
+      color="#19ffd6"
+      large
+      round
+      fixed
+      bottom
+      light
+    >new weight</v-btn>
   </div>
 </template>
 
