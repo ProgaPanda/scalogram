@@ -2,7 +2,7 @@
   <div>
     <v-btn
       :to="{ name: 'addWeight'}"
-      class="new-weight-btn"
+      class="new-weight-btn font-weight-bold"
       color="#19ffd6"
       large
       round

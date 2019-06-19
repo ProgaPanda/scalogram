@@ -20,6 +20,7 @@ export default {
   },
   mounted: function() {
     db.collection("weight-collection")
+      .orderBy("createdAt", "desc")
       .where("owner", "==", "looda97@gmail.com")
       .get()
       .then(querySnapshot => {

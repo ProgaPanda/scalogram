@@ -1,7 +1,11 @@
 <template>
   <div id="app" dark>
     <v-app dark>
-      <router-view/>
+      <v-content>
+        <keep-alive include="Dashboard">
+          <router-view/>
+        </keep-alive>
+      </v-content>
     </v-app>
   </div>
 </template>

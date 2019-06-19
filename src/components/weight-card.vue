@@ -2,13 +2,13 @@
   <v-card color="#202137" class="weight-card mb-3" height="80" flat dark>
     <v-layout pa-3 row wrap align-center>
       <v-flex>
-        <h3 class="weight-card__date mb-2">{{date}}</h3>
+        <h3 class="weight-card__date mb-2">{{date.slice(5,10).split('-').reverse().join('/')}}</h3>
         <h3 class="weight-card__weight-difference" :style="{ color: diffrence_color}">
           <v-icon
             class="weight-card__weight-difference__icon"
             :style="{ color: diffrence_color}"
           >arrow_upward</v-icon>
-          {{weightDifference}} kg
+          {{weightDifference.toFixed(1)}} kg
         </h3>
       </v-flex>
       <v-spacer></v-spacer>
