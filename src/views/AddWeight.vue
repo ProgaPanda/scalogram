@@ -16,11 +16,11 @@
     </v-layout>
     <v-layout mt-5>
       <v-flex class="text-xs-center">
-        <h2 class="display-3 font-weight-bold">{{weight}}Kg</h2>
+        <h2 class="display-3 font-weight-bold">{{weight.toFixed(1)}}Kg</h2>
         <v-slider
           v-model="weight"
-          :min="last_weight - 15"
-          :max="last_weight + 15"
+          :min="minimum_weight"
+          :max="maximum_weight"
           step="0.1"
           color="#19d8b6"
           persistent-hint
@@ -58,15 +58,19 @@ export default {
 
         db.collection("weight-collection")
           .orderBy("createdAt", "desc")
-          .where("owner", "==", "looda97@gmail.com")
+          .where("owner", "==", this.user.email)
           .limit(1)
           .get()
           .then(querySnapshot => {
             if (querySnapshot.empty) {
-              this.last_weight = this.weight;
+              this.weight = this.minimum_weight;
+              this.isFirstEntry = true;
             } else {
+              // get the last weight entry
               this.last_weight = querySnapshot.docs[0].data().weight;
               this.weight = this.last_weight;
+              this.minimum_weight = this.weight - 15;
+              this.maximum_weight = this.weight + 15;
             }
           });
       }
@@ -74,9 +78,14 @@ export default {
   },
   methods: {
     addWeight: function() {
+      if (this.isFirstEntry) {
+        this.difference = 0;
+      } else {
+        this.difference = this.weight - this.last_weight;
+      }
       const new_weight = {
         weight: this.weight,
-        difference: this.weight - this.last_weight,
+        difference: this.difference,
         date: this.date,
         createdAt: new Date(),
         owner: this.user.email
@@ -90,9 +99,14 @@ export default {
     }
   },
   data: () => ({
+    user: "",
     date: new Date().toISOString().substr(0, 10),
     weight: 0,
-    last_weight: 0
+    last_weight: 0,
+    difference: 0,
+    minimum_weight: 20,
+    maximum_weight: 300,
+    isFirstEntry: false
   })
 };
 </script>
