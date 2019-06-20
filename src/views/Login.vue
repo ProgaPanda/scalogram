@@ -58,7 +58,6 @@ export default {
               .get()
               .then(querySnapshot => {
                 if (querySnapshot.empty) {
-                  console.log("working");
                   router.replace("/welcome");
                 } else {
                   router.replace("/");

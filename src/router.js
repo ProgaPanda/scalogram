@@ -7,6 +7,8 @@ import Router from 'vue-router';
 import Dashboard from './views/Dashboard.vue';
 import addWeight from './views/AddWeight.vue';
 import Login from './views/Login.vue';
+import FirstTime from './views/FirstTime.vue';
+
 Vue.use(Router);
 
 const router = new Router({
@@ -33,6 +35,14 @@ const router = new Router({
 			path: '/login',
 			name: 'login',
 			component: Login
+		},
+		{
+			path: '/welcome',
+			name: 'firstTime',
+			component: FirstTime,
+			meta: {
+				requiresAuth: true
+			}
 		}
 	]
 });
