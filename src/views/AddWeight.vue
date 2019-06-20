@@ -23,6 +23,7 @@
           step="0.1"
           color="#19d8b6"
           persistent-hint
+          :loading="loading"
         ></v-slider>
       </v-flex>
     </v-layout>
@@ -77,6 +78,7 @@ export default {
   },
   methods: {
     addWeight: function() {
+      this.loading = "#ffffff";
       if (this.isFirstEntry) {
         this.difference = 0;
       } else {
@@ -93,6 +95,7 @@ export default {
       db.collection("weight-collection")
         .add(new_weight)
         .then(() => {
+          this.loading = false;
           router.replace("/");
         });
     }
@@ -105,7 +108,8 @@ export default {
     difference: 0,
     minimum_weight: 20,
     maximum_weight: 300,
-    isFirstEntry: false
+    isFirstEntry: false,
+    loading: false
   })
 };
 </script>
