@@ -4,15 +4,14 @@
       <v-flex mt-1>
         <h2 class="display-1 font-weight-medium">New Weight</h2>
       </v-flex>
-      <v-spacer></v-spacer>
       <v-flex class="text-xs-right">
         <v-btn to="/" flat icon>
           <v-icon medium>close</v-icon>
         </v-btn>
       </v-flex>
     </v-layout>
-    <v-layout mt-3>
-      <v-date-picker color="#19d8b6" v-model="date" full-width scrollable></v-date-picker>
+    <v-layout mt-5>
+      <v-date-picker color="#19d8b6" no-title v-model="date" full-width scrollable></v-date-picker>
     </v-layout>
     <v-layout mt-5>
       <v-flex class="text-xs-center">
@@ -27,7 +26,7 @@
         ></v-slider>
       </v-flex>
     </v-layout>
-    <v-flex class="text-xs-center">
+    <v-flex class="text-xs-center mt-5">
       <v-btn
         @click="addWeight"
         color="#19ffd6"
