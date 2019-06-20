@@ -17,4 +17,8 @@
   color: #fff;
   font-family: Roboto, sans-serif;
 }
+::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}
 </style>
