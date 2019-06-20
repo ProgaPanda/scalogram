@@ -1,5 +1,6 @@
 <template>
   <div id="app" dark>
+    <app-bar v-if="!$route.meta.loginView"/>
     <v-app dark>
       <v-content>
         <keep-alive include="Dashboard">
@@ -9,6 +10,15 @@
     </v-app>
   </div>
 </template>
+
+<script>
+import appBar from "@/components/app-bar";
+export default {
+  components: {
+    appBar
+  }
+};
+</script>
 
 
 <style lang="scss">
