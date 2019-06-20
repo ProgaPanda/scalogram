@@ -7,7 +7,7 @@
           <v-icon
             class="weight-card__weight-difference__icon"
             :style="{ color: diffrence_color}"
-          >arrow_upward</v-icon>
+          >{{diffrence_arrow}}</v-icon>
           {{weightDifference.toFixed(1)}} kg
         </h3>
       </v-flex>
@@ -26,7 +26,17 @@ export default {
   },
   computed: {
     diffrence_color: function() {
+      if (this.weightDifference == 0) {
+        return "#888995";
+      }
       return this.weightDifference < 0 ? "#28beaa" : "#d44a5f";
+    },
+
+    diffrence_arrow: function() {
+      if (this.weightDifference == 0) {
+        return "brightness_1";
+      }
+      return this.weightDifference < 0 ? "arrow_downward" : "arrow_upward";
     }
   }
 };
