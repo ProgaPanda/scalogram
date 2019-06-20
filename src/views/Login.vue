@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import { db } from "@/main";
 import firebase from "firebase/app";
 import "firebase/auth";
 import router from "@/router";
@@ -48,8 +49,21 @@ export default {
         .signInWithPopup(provider)
         .then(function(result) {
           let user = result.user;
+          console.log(user);
+
           if (user) {
-            router.replace("/");
+            db.collection("user-collection")
+              .where("user", "==", user.email)
+              .limit(1)
+              .get()
+              .then(querySnapshot => {
+                if (querySnapshot.empty) {
+                  console.log("working");
+                  router.replace("/welcome");
+                } else {
+                  router.replace("/");
+                }
+              });
           }
         })
         .catch(function(error) {
