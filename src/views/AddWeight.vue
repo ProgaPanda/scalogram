@@ -1,6 +1,6 @@
 <template>
-  <v-container>
-    <v-layout mt-2>
+  <v-container pt-0>
+    <v-layout>
       <v-flex mt-1>
         <h2 class="display-1 font-weight-medium">New Weight</h2>
       </v-flex>
@@ -10,10 +10,10 @@
         </v-btn>
       </v-flex>
     </v-layout>
-    <v-layout mt-5>
+    <v-layout mt-4>
       <v-date-picker color="#19d8b6" no-title v-model="date" full-width scrollable></v-date-picker>
     </v-layout>
-    <v-layout mt-5>
+    <v-layout mt-4>
       <v-flex class="text-xs-center">
         <h2 class="display-3 font-weight-bold">{{weight.toFixed(1)}}Kg</h2>
         <v-slider
@@ -27,7 +27,7 @@
         ></v-slider>
       </v-flex>
     </v-layout>
-    <v-flex class="text-xs-center mt-5">
+    <v-flex class="text-xs-center">
       <v-btn
         @click="addWeight"
         color="#19ffd6"

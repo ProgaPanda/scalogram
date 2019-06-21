@@ -15,10 +15,12 @@
       <v-toolbar-items></v-toolbar-items>
     </v-toolbar>
 
+    <!-- Navigation drawer -->
     <v-navigation-drawer v-model="drawer" class="drawer" app>
+      <!-- Buttons list -->
       <v-list class="pa-1" dark>
-        <v-list-tile avatar>
-          <v-avatar size="42px">
+        <v-list-tile class="my-3" avatar>
+          <v-avatar size="48px">
             <img v-if="user.picture" :src="user.picture" class="white-border" alt="Avatar">
             <img
               v-else
@@ -30,8 +32,16 @@
             <v-list-tile-title>{{user.name}}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-divider></v-divider>
-        <v-list-tile @click="logout" dark>
+        <v-divider color="#07071e"></v-divider>
+        <v-list-tile to="/" @click="drawer= false" class="mt-2">
+          <v-list-tile-action>
+            <v-icon color="#fff">home</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title style="color:white" class="text-uppercase">Dashboard</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile @click="logout">
           <v-list-tile-action>
             <v-icon>exit_to_app</v-icon>
           </v-list-tile-action>
@@ -80,9 +90,12 @@ export default {
 
 <style lang="scss" scoped>
 .drawer {
-  background-color: #19192d;
+  background-color: #0b0b2b;
 }
 .white-border {
   border: 2px solid #fff;
+}
+.drawer.primary--text {
+  color: rgb(233, 0, 0);
 }
 </style>

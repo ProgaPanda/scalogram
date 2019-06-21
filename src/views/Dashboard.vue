@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container pt-0>
     <v-layout>
       <v-flex xs12>
         <bmi-chart v-if="weight_store.length" :lastEntry="weight_store[0]" :height="user_height"/>
