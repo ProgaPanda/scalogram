@@ -2,7 +2,7 @@
   <v-container>
     <v-layout>
       <v-flex xs12>
-        <bmi-chart :lastEntry="weight_store[0]" :height="user_height"/>
+        <bmi-chart v-if="weight_store.length" :lastEntry="weight_store[0]" :height="user_height"/>
         <weight-history :weightData="weight_store"/>
         <new-weight-btn/>
       </v-flex>
