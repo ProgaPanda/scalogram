@@ -78,7 +78,7 @@ export default {
 </style>
 <style lang="scss">
 ._slider_thumb .v-slider__thumb {
-  border-radius: 0;
+  border-radius: 25%;
   height: 60px;
   width: 15px;
 }
