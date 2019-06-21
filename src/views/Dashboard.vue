@@ -62,6 +62,22 @@ export default {
               this.user_height = querySnapshot.docs[0].data().height;
             }
           });
+
+        this.$root.$on("deleteAllEntries", () => {
+          this.weight_store = [];
+          db.collection("weight-collection")
+            .where("owner", "==", this.user.email)
+            .get()
+            .then(querySnapshot => {
+              if (querySnapshot.empty) {
+                //do something
+              } else {
+                querySnapshot.forEach(weight => {
+                  weight.ref.delete();
+                });
+              }
+            });
+        });
       }
     });
   },

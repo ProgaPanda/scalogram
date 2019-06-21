@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-toolbar app dark color="#16172e" class="pa-1">
+    <v-toolbar app dark color="#16172e" class="pl-2 py-2">
       <v-btn @click.stop="drawer = !drawer" icon>
         <v-avatar size="42px">
           <img v-if="user.picture" :src="user.picture" class="white-border" alt="Avatar">
@@ -12,9 +12,37 @@
         </v-avatar>
       </v-btn>
       <v-spacer></v-spacer>
+      <v-menu transition="slide-y-transition" lazy light bottom left offset-y>
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-icon>more_vert</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-tile @click="deleteDialog = true">
+            <v-list-tile-action>
+              <v-icon color="red">delete</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title class="text-uppercase">clear all entries</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
+
       <v-toolbar-items></v-toolbar-items>
     </v-toolbar>
-
+    <v-dialog v-model="deleteDialog">
+      <v-card light>
+        <v-card-text>Delete all your weight entries?</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn @click="deleteDialog = false" flat>cancel</v-btn>
+          <v-btn @click="deleteAllEntries_emit" color="red darken-1" flat="flat">delete all entries</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <!-- Navigation drawer -->
     <v-navigation-drawer v-model="drawer" class="drawer" app>
       <!-- Buttons list -->
@@ -79,11 +107,18 @@ export default {
           router.replace("login");
           this.user = null;
         });
+    },
+    deleteAllEntries_emit: function() {
+      // emits a global event, listen on dashboard and
+      // executes delete function there
+      this.$root.$emit("deleteAllEntries");
+      this.deleteDialog = false;
     }
   },
   data: () => ({
     user: "",
-    drawer: false
+    drawer: false,
+    deleteDialog: false
   })
 };
 </script>
