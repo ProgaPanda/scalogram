@@ -2,6 +2,7 @@
   <v-container>
     <v-layout>
       <v-flex xs12>
+        <bmi-chart :lastEntry="weight_store[0]" :height="user_height"/>
         <weight-history :weightData="weight_store"/>
         <new-weight-btn/>
       </v-flex>
@@ -12,10 +13,12 @@
 <script>
 import { db } from "@/main";
 import firebase from "firebase/app";
+import bmiChart from "@/components/bmiChart";
 import weightHistory from "@/components/weightHistory";
 import newWeightBtn from "@/components/new-weight-btn";
 export default {
   components: {
+    "bmi-chart": bmiChart,
     "weight-history": weightHistory,
     "new-weight-btn": newWeightBtn
   },
@@ -48,12 +51,24 @@ export default {
               });
             }
           });
+        db.collection("user-collection")
+          .where("user", "==", user.email)
+          .limit(1)
+          .get()
+          .then(querySnapshot => {
+            if (querySnapshot.empty) {
+              // do something
+            } else {
+              this.user_height = querySnapshot.docs[0].data().height;
+            }
+          });
       }
     });
   },
   data: () => ({
     user: "",
-    weight_store: []
+    weight_store: [],
+    user_height: 0
   })
 };
 </script>
