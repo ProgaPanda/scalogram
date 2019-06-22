@@ -4,7 +4,7 @@
       <v-flex xs12>
         <bmi-chart v-if="weight_store.length" :lastEntry="weight_store[0]" :height="user_height"/>
         <weight-history :weightData="weight_store"/>
-        <new-weight-btn v-if="weight_store.length" :lastWeight="weight_store[0].weight"/>
+        <new-weight-btn :lastWeight="lastWeight"/>
       </v-flex>
     </v-layout>
   </v-container>
@@ -79,8 +79,20 @@ export default {
               }
             });
         });
+
+        this.$root.$on("newEntry", new_weight => {
+          this.weight_store.unshift(new_weight);
+        });
       }
     });
+  },
+  computed: {
+    lastWeight: function() {
+      if (this.weight_store.length) {
+        return this.weight_store[0].weight;
+      }
+      return 0;
+    }
   },
   data: () => ({
     user: "",

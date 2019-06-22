@@ -1,43 +1,45 @@
 <template>
-  <v-container pt-0>
-    <v-layout>
-      <v-flex mt-1>
-        <h2 class="display-1 font-weight-medium">New Weight</h2>
-      </v-flex>
-      <v-flex class="text-xs-right">
-        <v-btn to="/" flat icon>
-          <v-icon medium>close</v-icon>
-        </v-btn>
-      </v-flex>
-    </v-layout>
-    <v-layout mt-4>
-      <v-date-picker color="#19d8b6" no-title v-model="date" full-width scrollable></v-date-picker>
-    </v-layout>
-    <v-layout mt-4>
+  <transition name="slide" mode="out-in">
+    <v-container pt-0>
+      <v-layout>
+        <v-flex mt-1>
+          <h2 class="display-1 font-weight-medium">New Weight</h2>
+        </v-flex>
+        <v-flex class="text-xs-right">
+          <v-btn to="/" flat icon>
+            <v-icon medium>close</v-icon>
+          </v-btn>
+        </v-flex>
+      </v-layout>
+      <v-layout mt-4>
+        <v-date-picker color="#19d8b6" no-title v-model="date" full-width scrollable></v-date-picker>
+      </v-layout>
+      <v-layout mt-4>
+        <v-flex class="text-xs-center">
+          <h2 class="display-3 font-weight-bold">{{weight.toFixed(1)}}Kg</h2>
+          <v-slider
+            v-model="weight"
+            :min="minimum_weight"
+            :max="maximum_weight"
+            step="0.1"
+            color="#19d8b6"
+            persistent-hint
+            :loading="loading"
+          ></v-slider>
+        </v-flex>
+      </v-layout>
       <v-flex class="text-xs-center">
-        <h2 class="display-3 font-weight-bold">{{weight.toFixed(1)}}Kg</h2>
-        <v-slider
-          v-model="weight"
-          :min="minimum_weight"
-          :max="maximum_weight"
-          step="0.1"
-          color="#19d8b6"
-          persistent-hint
-          :loading="loading"
-        ></v-slider>
+        <v-btn
+          @click="addWeight"
+          color="#19ffd6"
+          class="new-weight-btn font-weight-bold"
+          large
+          round
+          light
+        >save</v-btn>
       </v-flex>
-    </v-layout>
-    <v-flex class="text-xs-center">
-      <v-btn
-        @click="addWeight"
-        color="#19ffd6"
-        class="new-weight-btn font-weight-bold"
-        large
-        round
-        light
-      >save</v-btn>
-    </v-flex>
-  </v-container>
+    </v-container>
+  </transition>
 </template>
 
 <script>
@@ -56,8 +58,14 @@ export default {
       }
     });
     this.weight = parseFloat(this.$route.params.lastWeight);
-    this.minimum_weight = this.weight - 15;
-    this.maximum_weight = this.weight + 15;
+    if (this.weight) {
+      this.minimum_weight = this.weight - 15;
+      this.maximum_weight = this.weight + 15;
+    } else {
+      this.minimum_weight = 20;
+      this.maximum_weight = 300;
+      this.weight = this.minimum_weight;
+    }
   },
   methods: {
     addWeight: function() {
@@ -79,6 +87,7 @@ export default {
         .add(new_weight)
         .then(() => {
           this.loading = false;
+          this.$root.$emit("newEntry", new_weight);
           router.replace("/");
         });
     }

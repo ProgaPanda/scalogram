@@ -3,11 +3,9 @@
     <app-bar v-if="!$route.meta.loginView"/>
     <v-app dark>
       <v-content>
-        <transition name="slide" mode="out-in">
-          <keep-alive include="Dashboard">
-            <router-view/>
-          </keep-alive>
-        </transition>
+        <keep-alive include="Dashboard">
+          <router-view/>
+        </keep-alive>
       </v-content>
     </v-app>
   </div>
