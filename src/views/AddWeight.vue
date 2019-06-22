@@ -24,7 +24,6 @@
             step="0.1"
             color="#19d8b6"
             persistent-hint
-            :loading="loading"
           ></v-slider>
         </v-flex>
       </v-layout>
@@ -33,6 +32,7 @@
           @click="addWeight"
           color="#19ffd6"
           class="new-weight-btn font-weight-bold"
+          :loading="loading"
           large
           round
           light
@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     addWeight: function() {
-      this.loading = "#ffffff";
+      this.loading = true;
       if (!this.$route.params.lastWeight) {
         this.difference = 0;
       } else {
