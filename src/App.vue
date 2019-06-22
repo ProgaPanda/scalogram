@@ -4,7 +4,9 @@
     <v-app dark>
       <v-content>
         <keep-alive include="Dashboard">
-          <router-view/>
+          <transition name="slide" mode="out-in">
+            <router-view/>
+          </transition>
         </keep-alive>
       </v-content>
     </v-app>
@@ -27,8 +29,12 @@ export default {
   color: #fff;
   font-family: Roboto, sans-serif;
 }
-::-webkit-scrollbar {
-  display: none;
-  width: 0;
+/*slide transition*/
+.slide-enter-active {
+  transition: transform 0.15s ease-out;
 }
+.slide-enter {
+  transform: translateY(100%);
+}
+</style>
 </style>
