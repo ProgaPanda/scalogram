@@ -50,39 +50,22 @@ export default {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         let userObj = {
-          name: user.displayName,
-          picture: user.photoURL,
           email: user.email
         };
         this.user = userObj;
-
-        db.collection("weight-collection")
-          .orderBy("createdAt", "desc")
-          .where("owner", "==", this.user.email)
-          .limit(1)
-          .get()
-          .then(querySnapshot => {
-            if (querySnapshot.empty) {
-              this.weight = this.minimum_weight;
-              this.isFirstEntry = true;
-            } else {
-              // get the last weight entry
-              this.last_weight = querySnapshot.docs[0].data().weight;
-              this.weight = this.last_weight;
-              this.minimum_weight = this.weight - 15;
-              this.maximum_weight = this.weight + 15;
-            }
-          });
       }
     });
+    this.weight = parseFloat(this.$route.params.lastWeight);
+    this.minimum_weight = this.weight - 15;
+    this.maximum_weight = this.weight + 15;
   },
   methods: {
     addWeight: function() {
       this.loading = "#ffffff";
-      if (this.isFirstEntry) {
+      if (!this.$route.params.lastWeight) {
         this.difference = 0;
       } else {
-        this.difference = this.weight - this.last_weight;
+        this.difference = this.weight - this.$route.params.lastWeight;
       }
       const new_weight = {
         weight: this.weight,
@@ -104,7 +87,6 @@ export default {
     user: "",
     date: new Date().toISOString().substr(0, 10),
     weight: 0,
-    last_weight: 0,
     difference: 0,
     minimum_weight: 20,
     maximum_weight: 300,

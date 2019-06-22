@@ -24,9 +24,10 @@ const router = new Router({
 			}
 		},
 		{
-			path: '/new-weight',
+			path: '/new-weight/:lastWeight',
 			name: 'addWeight',
 			component: addWeight,
+			props: true,
 			meta: {
 				requiresAuth: true
 			}

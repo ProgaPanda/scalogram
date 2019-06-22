@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-btn
-      :to="{ name: 'addWeight'}"
+      :to="{ name: 'addWeight',  params: { lastWeight }}"
       class="new-weight-btn font-weight-bold"
       color="#19ffd6"
       large
@@ -14,7 +14,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    lastWeight: Number
+  }
+};
 </script>
 
 <style lang="scss" scoped>

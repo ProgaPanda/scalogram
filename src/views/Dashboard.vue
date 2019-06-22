@@ -4,7 +4,7 @@
       <v-flex xs12>
         <bmi-chart v-if="weight_store.length" :lastEntry="weight_store[0]" :height="user_height"/>
         <weight-history :weightData="weight_store"/>
-        <new-weight-btn/>
+        <new-weight-btn v-if="weight_store.length" :lastWeight="weight_store[0].weight"/>
       </v-flex>
     </v-layout>
   </v-container>
@@ -17,6 +17,7 @@ import bmiChart from "@/components/bmiChart";
 import weightHistory from "@/components/weightHistory";
 import newWeightBtn from "@/components/new-weight-btn";
 export default {
+  name: "Dashboard",
   components: {
     "bmi-chart": bmiChart,
     "weight-history": weightHistory,
