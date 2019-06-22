@@ -12,7 +12,7 @@
         </v-avatar>
       </v-btn>
       <v-spacer></v-spacer>
-      <v-menu transition="slide-y-transition" lazy light bottom left offset-y>
+      <v-menu transition="slide-y-transition" light bottom left offset-y>
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
             <v-icon>more_vert</v-icon>
