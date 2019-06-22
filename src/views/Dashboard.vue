@@ -83,6 +83,10 @@ export default {
         this.$root.$on("newEntry", new_weight => {
           this.weight_store.unshift(new_weight);
         });
+
+        this.$root.$on("settingsChange", data => {
+          this.user_height = data.height;
+        });
       }
     });
   },

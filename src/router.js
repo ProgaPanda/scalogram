@@ -8,6 +8,7 @@ import Dashboard from './views/Dashboard.vue';
 import addWeight from './views/AddWeight.vue';
 import Login from './views/Login.vue';
 import FirstTime from './views/FirstTime.vue';
+import Settings from './views/Settings.vue';
 
 Vue.use(Router);
 
@@ -28,6 +29,14 @@ const router = new Router({
 			name: 'addWeight',
 			component: addWeight,
 			props: true,
+			meta: {
+				requiresAuth: true
+			}
+		},
+		{
+			path: '/settings',
+			name: 'settings',
+			component: Settings,
 			meta: {
 				requiresAuth: true
 			}

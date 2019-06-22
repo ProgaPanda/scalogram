@@ -69,6 +69,14 @@
             <v-list-tile-title style="color:white" class="text-uppercase">Dashboard</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile to="settings" class="mt-2">
+          <v-list-tile-action>
+            <v-icon color="#fff">settings</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title style="color:white" class="text-uppercase">Settings</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
         <v-list-tile @click="logout">
           <v-list-tile-action>
             <v-icon>exit_to_app</v-icon>
