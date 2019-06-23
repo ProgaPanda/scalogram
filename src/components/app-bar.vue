@@ -69,7 +69,7 @@
             <v-list-tile-title style="color:white" class="text-uppercase">Dashboard</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile to="settings" class="mt-2">
+        <v-list-tile to="settings" @click="drawer= false" class="mt-2">
           <v-list-tile-action>
             <v-icon color="#fff">settings</v-icon>
           </v-list-tile-action>
