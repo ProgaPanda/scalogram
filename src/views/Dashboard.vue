@@ -1,11 +1,18 @@
 <template>
   <v-container pt-0>
     <v-snackbar width="200" :color="alert.color" v-model="alert.active" :timeout="2000" top>
-      <span class="text-xs-center black--text">{{ alert.messege }}</span>
+      <span class="black--text">{{ alert.messege }}</span>
       <v-icon color="black">{{alert.icon}}</v-icon>
     </v-snackbar>
     <v-layout>
       <v-flex xs12>
+        <current-progress
+          class="text-xs-center"
+          v-if="weight_store.length"
+          :firstWeight="weight_store[weight_store.length - 1]"
+          :currentWeight="weight_store[0]"
+          :targetWeight="user_targetWeight"
+        />
         <bmi-chart v-if="weight_store.length" :lastEntry="weight_store[0]" :height="user_height"/>
         <weight-history :weightData="weight_store"/>
         <new-weight-btn :lastWeight="lastWeight"/>
@@ -17,12 +24,14 @@
 <script>
 import { db } from "@/main";
 import firebase from "firebase/app";
+import currentProgress from "@/components/currentProgress";
 import bmiChart from "@/components/bmiChart";
 import weightHistory from "@/components/weightHistory";
 import newWeightBtn from "@/components/new-weight-btn";
 export default {
   name: "Dashboard",
   components: {
+    "current-progress": currentProgress,
     "bmi-chart": bmiChart,
     "weight-history": weightHistory,
     "new-weight-btn": newWeightBtn
@@ -65,6 +74,7 @@ export default {
               // do something
             } else {
               this.user_height = querySnapshot.docs[0].data().height;
+              this.user_targetWeight = querySnapshot.docs[0].data().targetWeight;
             }
           });
 
@@ -101,6 +111,7 @@ export default {
 
         this.$root.$on("settingsChange", data => {
           this.user_height = data.height;
+          this.user_targetWeight = data.targetWeight;
           this.alert = {
             active: true,
             messege: "Settings saved",
@@ -123,7 +134,8 @@ export default {
     user: "",
     alert: {},
     weight_store: [],
-    user_height: 0
+    user_height: 0,
+    user_targetWeight: 0
   })
 };
 </script>
