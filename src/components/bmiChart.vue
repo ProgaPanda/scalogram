@@ -3,25 +3,23 @@
     <h1 class="bmi-chart__title mb-2">Your BMI</h1>
     <v-card v-if="height" color="#202137" class="bmi-chart_card pa-3" flat dark>
       <v-layout>
-        <v-layout>
-          <v-flex xs6>
-            <h3 class="bmi-chart__number">{{bmi.number}}</h3>
-            <h5
-              class="bmi-chart__category text-uppercase font-weight-black"
-              :style="{color: bmi.color}"
-            >{{bmi.category}}</h5>
-          </v-flex>
-          <v-flex>
-            <v-slider
-              class="_slider_thumb"
-              :value="bmi.number"
-              :color="bmi.color"
-              :min="8"
-              :max="45"
-              readonly
-            ></v-slider>
-          </v-flex>
-        </v-layout>
+        <v-flex xs6>
+          <h3 class="bmi-chart__number">{{bmi.number}}</h3>
+          <h5
+            class="bmi-chart__category text-uppercase font-weight-black"
+            :style="{color: bmi.color}"
+          >{{bmi.category}}</h5>
+        </v-flex>
+        <v-flex>
+          <v-slider
+            class="_slider_thumb"
+            :value="bmi.number"
+            :color="bmi.color"
+            :min="8"
+            :max="45"
+            readonly
+          ></v-slider>
+        </v-flex>
       </v-layout>
     </v-card>
   </v-container>
