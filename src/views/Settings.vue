@@ -100,6 +100,10 @@ export default {
                 this.loading = false;
                 this.$root.$emit("settingsChange", updated_settings);
                 router.replace("/");
+              })
+              .catch(error => {
+                console.log(error);
+                router.replace("/");
               });
           }
         });

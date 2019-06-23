@@ -1,5 +1,9 @@
 <template>
   <v-container pt-0>
+    <v-snackbar width="200" :color="alert.color" v-model="alert.active" :timeout="2000" top>
+      <span class="text-xs-center black--text">{{ alert.messege }}</span>
+      <v-icon color="black">{{alert.icon}}</v-icon>
+    </v-snackbar>
     <v-layout>
       <v-flex xs12>
         <bmi-chart v-if="weight_store.length" :lastEntry="weight_store[0]" :height="user_height"/>
@@ -71,11 +75,22 @@ export default {
             .get()
             .then(querySnapshot => {
               if (querySnapshot.empty) {
-                //do something
+                this.alert = {
+                  active: true,
+                  messege: "You have no entries",
+                  color: "#c6c6c6",
+                  icon: "info"
+                };
               } else {
                 querySnapshot.forEach(weight => {
                   weight.ref.delete();
                 });
+                this.alert = {
+                  active: true,
+                  messege: "All entries deleted",
+                  color: "#ff7876",
+                  icon: "check_circle"
+                };
               }
             });
         });
@@ -86,6 +101,12 @@ export default {
 
         this.$root.$on("settingsChange", data => {
           this.user_height = data.height;
+          this.alert = {
+            active: true,
+            messege: "Settings saved",
+            color: "#16e4bf",
+            icon: "check_circle"
+          };
         });
       }
     });
@@ -100,6 +121,7 @@ export default {
   },
   data: () => ({
     user: "",
+    alert: {},
     weight_store: [],
     user_height: 0
   })
