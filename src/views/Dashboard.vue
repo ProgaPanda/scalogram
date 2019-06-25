@@ -1,23 +1,28 @@
 <template>
   <v-container pt-0>
-    <v-snackbar width="200" :color="alert.color" v-model="alert.active" :timeout="2000" top>
-      <span class="black--text">{{ alert.messege }}</span>
-      <v-icon color="black">{{alert.icon}}</v-icon>
-    </v-snackbar>
-    <v-layout>
-      <v-flex xs12>
-        <current-progress
-          class="text-xs-center"
-          v-if="weight_store.length"
-          :firstWeight="weight_store[weight_store.length - 1]"
-          :currentWeight="weight_store[0]"
-          :targetWeight="user_targetWeight"
-        />
-        <bmi-chart v-if="weight_store.length" :lastEntry="weight_store[0]" :height="user_height"/>
-        <weight-history :weightData="weight_store"/>
-        <new-weight-btn :lastWeight="lastWeight"/>
-      </v-flex>
-    </v-layout>
+    <loading :active.sync="isLoading" background-color="#16172e" is-full-page>
+      <ball-grid-pulse color="#19ffd6" scale="1"/>
+    </loading>
+    <div v-show="!isLoading">
+      <v-snackbar width="200" :color="alert.color" v-model="alert.active" :timeout="2000" top>
+        <span class="black--text">{{ alert.messege }}</span>
+        <v-icon color="black">{{alert.icon}}</v-icon>
+      </v-snackbar>
+      <v-layout>
+        <v-flex xs12>
+          <current-progress
+            class="text-xs-center"
+            v-if="weight_store.length"
+            :firstWeight="weight_store[weight_store.length - 1]"
+            :currentWeight="weight_store[0]"
+            :targetWeight="user_targetWeight"
+          />
+          <bmi-chart v-if="weight_store.length" :lastEntry="weight_store[0]" :height="user_height"/>
+          <weight-history :weightData="weight_store"/>
+          <new-weight-btn :lastWeight="lastWeight"/>
+        </v-flex>
+      </v-layout>
+    </div>
   </v-container>
 </template>
 
@@ -28,15 +33,24 @@ import currentProgress from "@/components/currentProgress";
 import bmiChart from "@/components/bmiChart";
 import weightHistory from "@/components/weightHistory";
 import newWeightBtn from "@/components/new-weight-btn";
+//import loading component
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
+import "vue-loaders/dist/vue-loaders.css";
+import ballGridPulse from "vue-loaders/dist/loaders/ball-grid-pulse";
+
 export default {
   name: "Dashboard",
   components: {
     "current-progress": currentProgress,
     "bmi-chart": bmiChart,
     "weight-history": weightHistory,
-    "new-weight-btn": newWeightBtn
+    "new-weight-btn": newWeightBtn,
+    Loading,
+    "ball-grid-pulse": ballGridPulse.component
   },
   mounted: function() {
+    this.isLoading = true;
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         let userObj = {
@@ -63,6 +77,7 @@ export default {
                 };
                 this.weight_store.push(weight_instance);
               });
+              this.isLoading = false;
             }
           });
         db.collection("user-collection")
@@ -131,6 +146,7 @@ export default {
     }
   },
   data: () => ({
+    isLoading: true,
     user: "",
     alert: {},
     weight_store: [],
