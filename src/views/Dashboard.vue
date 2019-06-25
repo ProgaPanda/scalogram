@@ -67,6 +67,7 @@ export default {
           .then(querySnapshot => {
             if (querySnapshot.empty) {
               //do something
+              this.isLoading = false;
             } else {
               querySnapshot.forEach(weight => {
                 const weight_instance = {
@@ -146,7 +147,7 @@ export default {
     }
   },
   data: () => ({
-    isLoading: true,
+    isLoading: false,
     user: "",
     alert: {},
     weight_store: [],
