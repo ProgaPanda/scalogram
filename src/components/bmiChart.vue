@@ -3,7 +3,7 @@
     <h1 class="bmi-chart__title mb-2">Your BMI</h1>
     <v-card v-if="height" color="#202137" class="bmi-chart_card pa-3" flat dark>
       <v-layout>
-        <v-flex xs6>
+        <v-flex xs8>
           <h3 class="bmi-chart__number">{{bmi.number}}</h3>
           <h5
             class="bmi-chart__category text-uppercase font-weight-black"
