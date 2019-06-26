@@ -1,5 +1,5 @@
 <template>
-  <v-container pt-0>
+  <v-container pa-0>
     <loading :active.sync="isLoading" background-color="#16172e" is-full-page>
       <ball-grid-pulse color="#19ffd6" scale="1"/>
     </loading>
@@ -8,7 +8,8 @@
         <span class="black--text">{{ alert.messege }}</span>
         <v-icon color="black">{{alert.icon}}</v-icon>
       </v-snackbar>
-      <v-layout>
+      <weight-chart v-if="weight_store.length" :weights="weight_store"/>
+      <v-layout px-3>
         <v-flex xs12>
           <current-progress
             class="text-xs-center"
@@ -29,6 +30,8 @@
 <script>
 import { db } from "@/main";
 import firebase from "firebase/app";
+
+import weightChart from "@/components/weightChart";
 import currentProgress from "@/components/currentProgress";
 import bmiChart from "@/components/bmiChart";
 import weightHistory from "@/components/weightHistory";
@@ -42,6 +45,7 @@ import ballGridPulse from "vue-loaders/dist/loaders/ball-grid-pulse";
 export default {
   name: "Dashboard",
   components: {
+    "weight-chart": weightChart,
     "current-progress": currentProgress,
     "bmi-chart": bmiChart,
     "weight-history": weightHistory,
