@@ -1,5 +1,5 @@
 <template>
-  <v-container pa-1 mb-4>
+  <v-container pa-2 mb-3>
     <v-layout>
       <line-chart
         :library="chartJS_options"

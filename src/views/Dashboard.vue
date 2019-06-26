@@ -8,7 +8,7 @@
         <span class="black--text">{{ alert.messege }}</span>
         <v-icon color="black">{{alert.icon}}</v-icon>
       </v-snackbar>
-      <weight-chart v-if="weight_store.length" :weights="weight_store"/>
+      <weight-chart v-if="weight_store.length >= 2" :weights="weight_store"/>
       <v-layout px-3>
         <v-flex xs12>
           <current-progress
