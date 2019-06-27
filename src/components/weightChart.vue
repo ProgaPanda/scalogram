@@ -1,5 +1,5 @@
 <template>
-  <v-container pa-2 mb-3>
+  <v-container pa-2 mb-2>
     <v-layout>
       <line-chart
         :library="chartJS_options"
@@ -15,7 +15,7 @@
           }"
         :data="recent_entries"
         :min="Math.round(min_weight) - 1"
-        height="250px"
+        height="220px"
       ></line-chart>
     </v-layout>
   </v-container>
