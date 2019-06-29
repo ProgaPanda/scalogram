@@ -60,7 +60,7 @@
             <v-list-tile-title>{{user.name}}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-divider color="#07071e"></v-divider>
+        <v-divider color="#161623"></v-divider>
         <v-list-tile to="/" @click="drawer= false" class="mt-2">
           <v-list-tile-action>
             <v-icon color="#fff">home</v-icon>
@@ -133,12 +133,9 @@ export default {
 
 <style lang="scss" scoped>
 .drawer {
-  background-color: #0b0b2b;
+  background-color: #1b1b2c;
 }
 .white-border {
   border: 2px solid #fff;
-}
-.drawer.primary--text {
-  color: rgb(233, 0, 0);
 }
 </style>
