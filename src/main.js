@@ -7,9 +7,8 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 let app = '';
-
 firebase.initializeApp({
-	apiKey: 'AIzaSyApQOEsN41Q-OydAMVoO1B_GSz5SS6D9SU',
+	apiKey: process.env.VUE_APP_API_KEY,
 	authDomain: 'scalogram.firebaseapp.com',
 	databaseURL: 'https://scalogram-io.firebaseio.com',
 	projectId: 'scalogram-io',
