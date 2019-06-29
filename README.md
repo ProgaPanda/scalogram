@@ -3,7 +3,7 @@ A light **weight tracking** progressive web app **(PWA)** built with Vue.js
 
 ![Scalogram Logo](https://raw.githubusercontent.com/ProgaPanda/scalogram/master/public/img/icons/android-chrome-192x192.png)
 # Link
-
+[scalogram.web.app](https://scalogram.web.app)
 
 # Screens
 ![Screenshot_20190629_165301](https://user-images.githubusercontent.com/6924756/60386042-2ac8fe80-9a99-11e9-8e3b-b2d1724ec977.png)
